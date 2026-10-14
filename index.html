@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="YashdaWearex weaves and dyes cotton, lace, wool and jacquard fabrics in small batches, colour-matched to your shade card.">
+<style>body{margin:0}</style>
+<title>YashdaWearex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: plum sticky bar and lace-photo hero, then bands cut apart by pinking-shear zigzags; stitched cards, arch swatches, a Rose Dusk shade card. Light = blush, dark = wine. */
+@property --rot{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{
+  --bg:#1E1115; --bg2:#2A171C; --band1:#2A171C; --band2:#36202A; --band3:#46272F;
+  --deepc:#150B0E; --deep-a:#3A2029; --deep-b:#190D11; --foot-a:#2A171C; --foot-b:#150B0E;
+  --card:rgba(231,207,204,.07); --card-hi:rgba(231,207,204,.13);
+  --line:rgba(231,183,176,.30); --line-soft:rgba(231,207,204,.15); --stitch:rgba(231,183,176,.38); --tex:rgba(255,236,232,.045);
+  --fg:#F9ECE9; --muted:#D6B7B3; --accent:#E7C3BE; --accent-text:#EDB7AE; --on-accent:#2B161B; --hi:#F0B8AE;
+  --glow:rgba(231,183,176,.22); --spot:rgba(240,184,174,.2); --shadow:0 22px 44px -20px rgba(0,0,0,.75);
+  --scrim:rgba(30,17,21,.74); --head:rgba(30,17,21,.93); --field:#1E1115; --knob-x:30px; --sun-c:#EDB7AE; --moon-c:#2B161B; --good:#8FD3AE;
+  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --zz:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+  --bg:#FBF4F2; --bg2:#FFFFFF; --band1:#F4E4E1; --band2:#EBD3CF; --band3:#E3C5C1;
+  --deepc:#5E3640; --deep-a:#6A3D48; --deep-b:#321D24; --foot-a:#46272F; --foot-b:#22131A;
+  --card:#FFFFFF; --card-hi:#FFFFFF; --line:rgba(122,75,82,.30); --line-soft:rgba(94,54,64,.15); --stitch:rgba(122,75,82,.42); --tex:rgba(94,54,64,.055);
+  --fg:#2B161B; --muted:#684850; --accent:#7A4B52; --accent-text:#7A4B52; --on-accent:#FFF6F4; --hi:#A5605D;
+  --glow:rgba(165,96,93,.22); --spot:rgba(165,96,93,.14); --shadow:0 22px 40px -22px rgba(70,39,47,.5);
+  --scrim:rgba(251,244,242,.84); --field:#FBF4F2; --knob-x:0px; --sun-c:#2B161B; --moon-c:#EDB7AE; --good:#2C8A5C; color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#FBF4F2; --bg2:#FFFFFF; --band1:#F4E4E1; --band2:#EBD3CF; --band3:#E3C5C1;
+  --deepc:#5E3640; --deep-a:#6A3D48; --deep-b:#321D24; --foot-a:#46272F; --foot-b:#22131A;
+  --card:#FFFFFF; --card-hi:#FFFFFF; --line:rgba(122,75,82,.30); --line-soft:rgba(94,54,64,.15); --stitch:rgba(122,75,82,.42); --tex:rgba(94,54,64,.055);
+  --fg:#2B161B; --muted:#684850; --accent:#7A4B52; --accent-text:#7A4B52; --on-accent:#FFF6F4; --hi:#A5605D;
+  --glow:rgba(165,96,93,.22); --spot:rgba(165,96,93,.14); --shadow:0 22px 40px -22px rgba(70,39,47,.5);
+  --scrim:rgba(251,244,242,.84); --field:#FBF4F2; --knob-x:0px; --sun-c:#2B161B; --moon-c:#EDB7AE; --good:#2C8A5C; color-scheme:light}
+/* always-dark plum scope: header, hero, process, impact, cta, footer */
+.dk{--bg:#2A171C;--bg2:#3A2029;--card:rgba(255,236,232,.07);--card-hi:rgba(255,236,232,.13);--line:rgba(231,183,176,.34);--line-soft:rgba(231,207,204,.17);--stitch:rgba(231,183,176,.42);--tex:rgba(255,236,232,.05);--fg:#F9ECE9;--muted:#DEC2BE;--accent:#E7C3BE;--accent-text:#EDB7AE;--on-accent:#2B161B;--hi:#F0B8AE;--glow:rgba(231,183,176,.24);--spot:rgba(240,184,174,.22);--shadow:0 22px 44px -20px rgba(0,0,0,.75);--scrim:rgba(30,17,21,.76);--head:rgba(30,17,21,.93);--field:rgba(20,10,13,.55);--good:#8FD3AE;color-scheme:dark;color:var(--fg);background:radial-gradient(800px 380px at 100% 0,rgba(240,184,174,.12),transparent),linear-gradient(160deg,var(--deep-a),var(--deep-b))}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:400 15.5px/1.6 var(--sans);overflow-x:hidden;transition:background .35s,color .35s}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent-text);outline-offset:3px;border-radius:6px}
+.wrap{width:min(100% - 2rem,1360px);margin-inline:auto}
+section{position:relative;background:var(--bg);padding-block:clamp(2rem,3.4vw,2.8rem);scroll-margin-top:4rem}
+section>.wrap{position:relative;z-index:1}
+section::before{content:"";position:absolute;z-index:2;top:-1px;left:0;right:0;height:11px;background:var(--prev,var(--bg));-webkit-mask:var(--zz);mask:var(--zz);pointer-events:none}
+section.b1{background:var(--band1)}section.b2{background:var(--band2)}section.b3{background:var(--band3)}
+section.dk{background:radial-gradient(800px 380px at 100% 0,rgba(240,184,174,.12),transparent),linear-gradient(160deg,var(--deep-a),var(--deep-b))}
+#marquee{--prev:var(--deepc)}#collections{--prev:var(--band1)}#why{--prev:var(--bg)}#process{--prev:var(--band2)}#gallery{--prev:var(--deepc)}#impact{--prev:var(--bg)}#story{--prev:var(--deepc)}#faq{--prev:var(--band1)}#contact{--prev:var(--band2)}#cta{--prev:var(--bg)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08;text-wrap:balance;margin:0}
+p{margin:0}
+em{font-style:italic;color:var(--hi)}
+.eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--accent-text)}
+.h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
+.h2::after{content:"";display:block;width:70px;height:7px;margin-top:.5rem;background:radial-gradient(circle,var(--accent-text) 1.6px,transparent 2px) 0 50%/10px 7px repeat-x;transition:width .5s}
+.head:hover .h2::after{width:120px}
+.lead{color:var(--muted);max-width:62ch}
+.head{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.3rem}
+.head.row{flex-direction:row;align-items:end;justify-content:space-between;flex-wrap:wrap;gap:.8rem 1.5rem}
+.head .lead{font-size:15px}
+.fine{font-size:12px;color:var(--muted);margin-top:.8rem}
+
+/* progress + header */
+.bar{position:fixed;inset:0 0 auto 0;height:3px;z-index:60;background:linear-gradient(90deg,#E7C3BE,#C58F86);transform-origin:left;transform:scaleX(0)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--head);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:1rem;height:60px}
+.logo{display:flex;align-items:center;gap:.6rem}
+.logo svg{width:40px;height:40px;color:var(--accent);transition:transform .5s cubic-bezier(.3,1.4,.4,1)}
+.logo:hover svg{transform:rotate(-14deg) scale(1.07)}
+.logo b{display:block;font:700 25px/1 var(--serif);letter-spacing:.02em}
+.logo small{display:block;font-size:8.5px;letter-spacing:.38em;color:var(--accent-text);font-weight:600;margin-top:3px;text-transform:uppercase}
+.links{display:flex;gap:.15rem;margin-inline:auto}
+.links a{position:relative;padding:.5rem .8rem;font-size:13.5px;font-weight:500;color:var(--muted);border-radius:999px;transition:color .2s}
+.links a::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:2px;height:3px;background:radial-gradient(circle,var(--accent) 1.2px,transparent 1.6px) 0 50%/7px 3px repeat-x;transform:scaleX(0);transition:transform .3s}
+.links a:hover,.links a.on{color:var(--fg)}
+.links a:hover::after,.links a.on::after{transform:scaleX(1)}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;display:grid;place-items:center;color:var(--accent-text);transition:.25s}
+.icon-btn:hover{background:var(--accent);color:var(--on-accent);transform:rotate(18deg)}
+.icon-btn svg{width:18px;height:18px}
+.tswitch{position:relative;flex:none;width:66px;height:36px;border-radius:999px;border:1px solid var(--line);background:rgba(231,195,190,.1);padding:0;transition:border-color .3s,background .3s}
+.tswitch:hover{border-color:var(--accent-text);background:var(--glow)}
+.tswitch .knob{position:absolute;top:3px;left:3px;width:28px;height:28px;border-radius:50%;background:var(--accent);box-shadow:0 2px 10px rgba(0,0,0,.4);transform:translateX(var(--knob-x));transition:transform .5s cubic-bezier(.3,1.4,.4,1)}
+.tswitch svg{position:absolute;top:50%;width:17px;height:17px;transform:translateY(-50%);transition:color .35s,transform .5s}
+.tswitch .sun{left:9px;color:var(--sun-c)}.tswitch .moon{right:9px;color:var(--moon-c)}
+.tswitch:hover .sun{transform:translateY(-50%) rotate(60deg)}
+#burger{display:none;position:relative;width:42px;height:42px;padding:0;border-radius:15px 5px 15px 5px;border:1px solid var(--line);background:rgba(231,195,190,.1);color:var(--accent-text);transition:background .3s,border-radius .5s cubic-bezier(.3,1.4,.4,1),border-color .3s}
+#burger:hover{background:var(--glow);border-radius:5px 15px 5px 15px;border-color:var(--accent-text)}
+#burger span{position:absolute;left:11px;right:11px;height:2px;border-radius:2px;background:currentColor;transition:transform .35s,opacity .25s,top .35s}
+#burger span:nth-child(1){top:14px}#burger span:nth-child(2){top:20px;left:15px}#burger span:nth-child(3){top:26px}
+#burger[aria-expanded="true"] span:nth-child(1){top:20px;transform:rotate(45deg)}
+#burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+#burger[aria-expanded="true"] span:nth-child(3){top:20px;transform:rotate(-45deg)}
+.nav .btn.sm svg{width:16px;height:16px}
+
+/* buttons */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.72rem 1.3rem;border-radius:999px;font-size:13.5px;font-weight:600;letter-spacing:.05em;border:1px solid var(--accent);transition:transform .25s,box-shadow .25s,background .25s,color .25s;white-space:nowrap}
+.btn svg{width:15px;height:15px;transition:transform .25s}
+.btn:hover svg{transform:translateX(4px)}
+.btn.pri{background:var(--accent);color:var(--on-accent)}
+.btn.pri::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-120%)}
+.btn.pri:hover::before{transform:translateX(120%);transition:transform .7s}
+.btn.pri:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px var(--accent)}
+.btn.ghost{background:transparent;color:var(--fg)}
+.btn.ghost:hover{background:var(--glow);transform:translateY(-2px)}
+.btn:active{transform:scale(.97)}
+.btn.sm{padding:.5rem 1rem;font-size:12.5px}
+
+/* stitched cards */
+@property --gap{syntax:'<length>';inherits:false;initial-value:7px}
+.card{--rad:26px;--gap:7px;position:relative;background:var(--card);border:1px solid var(--line-soft);border-radius:var(--rad) 6px var(--rad) 6px;overflow:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .45s,border-radius .6s cubic-bezier(.3,1.4,.4,1),--gap .4s}
+.card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),var(--spot),transparent 70%);z-index:1}
+.card::after{content:"";position:absolute;inset:var(--gap);border:1.5px dashed var(--stitch);border-radius:calc(var(--rad) - 6px) 3px calc(var(--rad) - 6px) 3px;pointer-events:none;opacity:.6;transition:opacity .3s,border-color .3s;z-index:2}
+.card:hover{--gap:11px;transform:translateY(-6px) rotate(-.4deg);border-color:var(--accent-text);border-radius:6px var(--rad) 6px var(--rad);box-shadow:var(--shadow),0 0 30px -8px var(--glow)}
+.card:hover::before{opacity:1}
+.card:hover::after{opacity:1;border-color:var(--accent-text)}
+.card.still:hover{transform:none;--gap:7px}
+.zoom{overflow:hidden}
+.zoom img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.card:hover .zoom img,.zoom:hover img{transform:scale(1.09)}
+.rv{opacity:.4;transform:translateY(14px);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.card.rv.in{transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .45s,border-radius .6s cubic-bezier(.3,1.4,.4,1),--gap .4s,opacity .6s}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:clamp(1.4rem,3.4vw,2.4rem) 1.6rem;background:#1E1115}
+.hero::before{display:none}
+.hero-bg{position:absolute;inset:0;background:#1E1115 url(img/sequin-lace-fabric-rolls.jpg) 70% 45%/cover no-repeat;overflow:hidden}
+.hs{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;opacity:0;transition:opacity 1.4s ease;animation:kb 20s ease-in-out infinite alternate}
+.hs.on{opacity:1}
+.hero-dots{position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:4;display:flex;flex-direction:column;gap:10px}
+.hero-dots button{width:10px;height:10px;padding:0;border-radius:50%;border:1.5px solid var(--accent);background:transparent;transition:height .35s,background .3s,border-radius .35s}
+.hero-dots button:hover{background:var(--glow)}
+.hero-dots button[aria-current="true"]{background:var(--accent);height:28px;border-radius:6px}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(96deg,rgba(30,17,21,.95) 0,rgba(42,23,28,.82) 38%,rgba(42,23,28,.3) 72%,rgba(30,17,21,.35) 100%),linear-gradient(0deg,rgba(30,17,21,.9),transparent 40%)}
+.hero .wrap{position:relative;z-index:3}
+.hero-copy{max-width:640px;padding-block:clamp(.8rem,3vw,2rem) 1.8rem}
+.hero h1{font-size:clamp(2.5rem,5.6vw,4.4rem);margin-block:.7rem .9rem;text-shadow:0 2px 26px rgba(0,0,0,.5)}
+.hero .lead{font-size:17px;color:#E8D2CE}
+.cta{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.3rem}
+.pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+.pill{font-size:12.5px;font-weight:500;padding:.32rem .85rem;border-radius:999px;border:1px solid var(--line);background:rgba(30,17,21,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#EBD7D3;transition:.25s}
+.pill:hover{border-color:var(--accent);color:#fff;transform:translateY(-2px)}
+.badge{position:absolute;right:3%;top:6%;width:132px;height:132px;display:grid;place-items:center;border-radius:50%;background:var(--scrim);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line)}
+.badge svg.ring-t{position:absolute;inset:0;width:100%;height:100%;animation:spin 26s linear infinite}
+.badge text{font:600 10.5px var(--sans);letter-spacing:.2em;fill:var(--accent-text);text-transform:uppercase}
+.badge .ic{width:34px;height:34px;color:var(--accent)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.float{position:absolute;display:flex;align-items:center;gap:.6rem;padding:.6rem .9rem;border-radius:18px 5px 18px 5px;background:var(--scrim);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);font-size:12.5px;line-height:1.3;box-shadow:var(--shadow);animation:bob 5s ease-in-out infinite;right:5%;top:46%;color:var(--fg)}
+.float b{display:block;font:600 22px/1 var(--serif);color:var(--accent-text)}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.stats .card{background:rgba(30,17,21,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.stat{--rad:20px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.1rem}
+.stat b{font:600 clamp(1.8rem,3.2vw,2.5rem)/1 var(--serif);color:var(--accent-text);font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+.hero .eyebrow,.hero h1,.hero .lead,.hero .cta,.hero .pills,.hero .stats{animation:up .8s cubic-bezier(.2,.8,.2,1) both}
+.hero h1{animation-delay:.08s}.hero .lead{animation-delay:.16s}.hero .cta{animation-delay:.24s}.hero .pills{animation-delay:.32s}.hero .stats{animation-delay:.4s}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* marquee */
+#marquee{padding-block:.9rem}
+.mq{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq-track{display:flex;gap:2rem;width:max-content;animation:mq 40s linear infinite}
+.mq:hover .mq-track{animation-play-state:paused}
+.mq span{display:flex;align-items:center;gap:2rem;font:600 1.45rem var(--serif);font-style:italic;color:var(--fg);white-space:nowrap}
+.mq span::after{content:"";width:9px;height:9px;transform:rotate(45deg);border:1.5px solid var(--accent-text)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* collections */
+.tabs{display:flex;flex-wrap:wrap;gap:.4rem}
+.tab{padding:.45rem 1.05rem;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:13px;font-weight:500;color:var(--muted);transition:.25s}
+.tab:hover{border-color:var(--accent-text);color:var(--fg);transform:translateY(-2px)}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.col{--rad:30px;padding:12px 12px 1rem;display:flex;flex-direction:column;animation:pop .5s both}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+.sw{position:relative;aspect-ratio:16/10;border-radius:50% 50% 0 0/36% 36% 0 0;-webkit-mask:var(--zz);mask:var(--zz);overflow:hidden;transition:border-radius .6s cubic-bezier(.3,1.4,.4,1)}
+.col:hover .sw{border-radius:50% 50% 0 0/10% 10% 0 0}
+.sw img{width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;left:50%;top:.7rem;transform:translateX(-50%);font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:.28rem .75rem;border-radius:999px;background:var(--scrim);color:var(--accent-text);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line);transition:.3s;white-space:nowrap}
+.col:hover .tag{background:var(--accent);color:var(--on-accent)}
+.cb{padding:.85rem .6rem .3rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
+.cb h3{font-size:1.55rem;transition:color .3s}
+.col:hover .cb h3{color:var(--accent-text)}
+.cb p{font-size:14px;color:var(--muted)}
+.spec{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin:.2rem 0 0;padding:.7rem 0 0;list-style:none;border-top:1px solid var(--line-soft)}
+.spec li{text-align:center;font-size:11px;color:var(--muted);letter-spacing:.04em;transition:transform .35s}
+.spec b{display:block;font:600 1.15rem var(--serif);color:var(--fg)}
+.col:hover .spec li{transform:translateY(-3px)}
+.col:hover .spec li:nth-child(2){transition-delay:.05s}.col:hover .spec li:nth-child(3){transition-delay:.1s}
+.more{margin-top:auto;padding-top:.5rem;align-self:flex-start;font-size:13px;font-weight:600;color:var(--accent-text);display:inline-flex;gap:.4rem;align-items:center}
+.more svg{width:14px;height:14px;transition:transform .3s}
+.col:hover .more svg{transform:translateX(6px)}
+
+/* why */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.feat{--rad:24px;padding:1.2rem 1.3rem;display:flex;gap:1rem;align-items:flex-start}
+.ico{flex:none;width:48px;height:48px;display:grid;place-items:center;border-radius:50% 50% 50% 8px;border:1px solid var(--line);color:var(--accent-text);background:var(--glow);transition:.45s}
+.ico svg{width:23px;height:23px}
+.feat:hover .ico{background:var(--accent);color:var(--on-accent);transform:rotate(-12deg) scale(1.08);border-radius:50% 8px 50% 50%}
+.feat h3{font-size:1.35rem;margin-bottom:.2rem}
+.feat p{font-size:14px;color:var(--muted)}
+
+/* process */
+.proc{display:grid;grid-template-columns:.8fr 1.2fr;gap:1rem;height:410px}
+.steps{display:flex;flex-direction:column;gap:.5rem;height:100%}
+.step{flex:1;display:flex;align-items:center;gap:.8rem;text-align:left;padding:.5rem .95rem;border-radius:22px 6px 22px 6px;border:1px solid var(--line-soft);background:var(--card);transition:transform .35s,border-color .3s,border-radius .55s cubic-bezier(.3,1.4,.4,1),background .3s,box-shadow .3s}
+.step i{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 1.15rem var(--serif);font-style:normal;border:1px dashed var(--accent-text);color:var(--accent-text);transition:.3s}
+.step b{display:block;font-size:15px;font-weight:600}.step span{font-size:12.5px;color:var(--muted)}
+.step:hover{border-color:var(--accent-text);transform:translateX(6px);border-radius:6px 22px 6px 22px}
+.step[aria-selected="true"]{border-color:var(--accent-text);background:var(--card-hi);box-shadow:var(--shadow)}
+.step[aria-selected="true"] i{background:var(--accent);color:var(--on-accent);border:1px solid var(--accent)}
+.panel{--rad:30px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1fr);height:100%}
+.panel .zoom{position:relative;min-height:0;-webkit-mask:linear-gradient(#000,#000);}
+.panel .zoom img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.panel .txt{padding:1.5rem 1.6rem;display:flex;flex-direction:column;gap:.7rem;justify-content:center;min-width:0}
+.panel h3{font-size:1.9rem}
+.panel p{color:var(--muted);font-size:14.5px}
+.panel ul{margin:0;padding:0;list-style:none;display:grid;gap:.35rem}
+.panel li{font-size:13.5px;display:flex;gap:.55rem}
+.panel li::before{content:"";flex:none;margin-top:.55em;width:7px;height:7px;transform:rotate(45deg);background:var(--accent)}
+.panel.swap .zoom img,.panel.swap .txt{animation:fade .5s both}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* gallery */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:.8rem}
+.tile{position:relative;border-radius:30px 6px 30px 6px;overflow:hidden;border:1px solid var(--line-soft);padding:0;background:var(--card);text-align:left;transition:border-color .3s,box-shadow .4s,border-radius .6s cubic-bezier(.3,1.4,.4,1),transform .4s}
+.tile:hover{border-color:var(--accent-text);box-shadow:var(--shadow);border-radius:6px 30px 6px 30px;transform:translateY(-4px)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.tile:hover img{transform:scale(1.1)}
+.tile .cap{position:absolute;inset:auto 0 0 0;padding:2.4rem 1rem .8rem;background:linear-gradient(to top,rgba(30,17,21,.9),transparent);color:#F9ECE9;font-size:13px;display:flex;flex-direction:column;transform:translateY(34%);transition:transform .4s}
+.tile .cap b{font:600 1.2rem var(--serif)}
+.tile .cap span{opacity:0;transition:opacity .4s .05s;color:#E8D2CE}
+.tile:hover .cap,.tile:focus-visible .cap{transform:none}
+.tile:hover .cap span,.tile:focus-visible .cap span{opacity:1}
+.t1{grid-column:span 2;grid-row:span 2}.t2{grid-row:span 2}.t5{grid-column:span 2}.t6{grid-column:span 2}
+.lb{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:1rem;background:rgba(18,8,11,.9);backdrop-filter:blur(6px)}
+.lb.open{display:grid;animation:fade .3s both}
+.lb figure{margin:0;max-width:min(92vw,900px);position:relative}
+.lb img{max-height:78vh;width:auto;max-width:100%;border-radius:18px 4px 18px 4px;border:1px solid var(--accent);margin-inline:auto}
+.lb figcaption{margin-top:.7rem;text-align:center;color:#F1DDD9;font-size:14px}
+.lb .icon-btn{position:absolute;top:-14px;right:-6px;background:#2A171C;color:#EDB7AE}
+
+/* impact */
+#impact{background:linear-gradient(180deg,rgba(30,17,21,.88),rgba(42,23,28,.93)),url(img/cable-knit-wool-texture.jpg) center/cover}
+.imp{display:grid;grid-template-columns:.8fr 1.2fr;gap:1.4rem;align-items:center}
+.imp .lead{margin-top:.8rem;font-size:15px}
+.rings{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.ring{--rad:24px;padding:1rem .5rem;text-align:center}
+.ring svg{width:96px;height:96px;margin:0 auto .4rem;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:7;stroke-linecap:round}
+.ring .tr{stroke:var(--line-soft)}.ring .fg{stroke:var(--accent);stroke-dasharray:264;stroke-dashoffset:264;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1)}
+.ring.in .fg{stroke-dashoffset:calc(264 - 264 * var(--p) / 100)}
+.ring b{display:block;font:600 1.7rem var(--serif);color:var(--accent-text)}
+.ring span{font-size:12.5px;color:var(--muted);display:block;padding-inline:.3rem}
+
+/* story */
+.story{display:grid;grid-template-columns:.95fr 1.05fr;gap:1.6rem;align-items:center}
+.pics{position:relative;aspect-ratio:16/11}
+.pics .a{position:absolute;inset:0 18% 14% 0;border-radius:50% 50% 8px 8px/30% 30% 8px 8px;overflow:hidden;border:1px solid var(--line)}
+.pics .b{position:absolute;right:0;bottom:0;width:42%;aspect-ratio:3/4;border-radius:22px 6px 22px 6px;overflow:hidden;border:4px solid var(--bg);box-shadow:var(--shadow);transition:transform .5s,border-radius .6s}
+.pics:hover .b{transform:translateY(-8px) rotate(2deg);border-radius:6px 22px 6px 22px}
+.pics img{width:100%;height:100%;object-fit:cover}
+.story .lead{margin-top:.7rem;font-size:15px}
+.miles{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.1rem}
+.mile{--rad:20px;padding:.8rem 1rem}
+.mile b{font:600 1.6rem var(--serif);color:var(--accent-text);display:block;line-height:1}
+.mile h3{font:600 1.05rem var(--sans);margin:.25rem 0 .1rem}
+.mile p{font-size:13px;color:var(--muted)}
+
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;align-items:start}
+details{border:1px solid var(--line-soft);background:var(--card);border-radius:22px 6px 22px 6px;transition:border-color .3s,border-radius .55s cubic-bezier(.3,1.4,.4,1),transform .35s,box-shadow .35s}
+details:hover,details[open]{border-color:var(--accent-text);border-radius:6px 22px 6px 22px;box-shadow:var(--shadow)}
+details:hover{transform:translateY(-3px)}
+summary{list-style:none;cursor:pointer;padding:.9rem 1.1rem;font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;font:400 22px/1 var(--sans);color:var(--accent-text);transition:transform .3s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 1.1rem 1rem;font-size:14.5px;color:var(--muted)}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1.1fr .9fr;gap:1rem}
+form.card{--rad:30px;padding:1.4rem 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.f{display:flex;flex-direction:column;gap:.3rem;font-size:12.5px;font-weight:600;letter-spacing:.05em;color:var(--muted)}
+.f.full{grid-column:1/-1}
+.f input,.f select,.f textarea{font:400 14.5px var(--sans);color:var(--fg);background:var(--field);border:1px solid var(--line-soft);border-radius:14px 4px 14px 4px;padding:.62rem .8rem;transition:border-color .25s,box-shadow .25s;position:relative;z-index:3}
+.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--accent-text);box-shadow:0 0 0 3px var(--glow)}
+.f textarea{resize:vertical;min-height:70px}
+.msg{grid-column:1/-1;font-size:13.5px;color:var(--good);min-height:1.2em;position:relative;z-index:3}
+.msg a{color:var(--accent-text);text-decoration:underline}
+.hint{font-size:12.5px;color:var(--muted)}
+.wa svg{width:17px;height:17px;flex:none}
+.locs{display:grid;gap:.7rem;grid-template-rows:repeat(3,1fr)}
+.loc{--rad:22px;padding:.9rem 1.1rem;display:flex;gap:.9rem;align-items:center}
+.loc svg{flex:none;width:22px;height:22px;color:var(--accent-text)}
+.loc b{font:600 1.15rem var(--serif);display:block}.loc span{font-size:13.5px;color:var(--muted);display:block}
+.copy{display:inline-flex;align-items:center;gap:.5rem;font-size:13.5px;color:var(--accent-text);background:none;border:0;padding:0;position:relative;z-index:3}
+.copy:hover{text-decoration:underline}
+
+/* cta + footer */
+#cta{background:linear-gradient(100deg,rgba(30,17,21,.92),rgba(58,32,41,.78)),url(img/warping-weaving-machine.jpg) center/cover;padding-block:2.2rem 2.2rem}
+.cta-in{display:flex;align-items:center;justify-content:space-between;gap:1.2rem;flex-wrap:wrap}
+.cta-in h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+.cta-in p{color:var(--muted);margin-top:.3rem}
+footer{position:relative;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted);background:linear-gradient(180deg,var(--foot-a),var(--foot-b))}
+.f-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:1rem 2rem;padding-block:1.8rem .8rem}
+.f-top>div{min-width:0}
+.f-brand p{max-width:36ch;margin:.5rem 0 .7rem;font-size:13px;line-height:1.5}
+.social{display:flex;gap:.5rem}
+.social a{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px 4px 12px 4px;color:var(--accent-text);transition:transform .35s,background .3s,color .3s,border-radius .5s}
+.social a svg{width:15px;height:15px}
+.social a:hover{background:var(--accent);color:var(--on-accent);transform:translateY(-4px);border-radius:4px 12px 4px 12px}
+footer h4{margin:0 0 .5rem;font:600 11.5px var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--accent-text)}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:.3rem;font-size:13px}
+footer ul.two-col{grid-template-columns:1fr 1fr;column-gap:1rem}
+footer li a{display:inline-block;transition:color .2s,transform .25s}
+footer li a:hover{color:var(--accent-text);transform:translateX(5px)}
+.news{display:flex;gap:.5rem;margin-top:.55rem}
+.news input{flex:1;min-width:0;font:400 13.5px var(--sans);color:var(--fg);background:var(--field);border:1px solid var(--line-soft);border-radius:999px;padding:.5rem .9rem}
+.news input:focus{outline:none;border-color:var(--accent-text);box-shadow:0 0 0 3px var(--glow)}
+#nmsg{margin-top:.2rem;font-size:12.5px;color:var(--good)}
+.f-bot{display:flex;justify-content:space-between;align-items:center;gap:.5rem 1.4rem;flex-wrap:wrap;padding-block:.65rem;border-top:1px solid var(--line-soft);font-size:12.5px}
+.f-bot nav{display:flex;gap:1.1rem;flex-wrap:wrap}
+.f-bot a:hover{color:var(--accent-text)}
+#top{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:45;background:var(--bg2);opacity:0;pointer-events:none;transform:translateY(10px);transition:.3s}
+#top.show{opacity:1;pointer-events:auto;transform:none}
+
+@media (max-width:1080px){
+  .cols,.feats{grid-template-columns:repeat(2,1fr)}
+  .shade,.imp,.story,.contact{grid-template-columns:1fr}
+  .rings{grid-template-columns:repeat(4,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .f-top{grid-template-columns:1fr 1fr}
+  .badge{width:104px;height:104px}.float{display:none}
+}
+@media (max-width:880px){
+  .links{display:none}.nav .btn{display:none}
+  #burger{display:grid;margin-left:auto}
+  .links.open{display:flex;position:absolute;left:0;right:0;top:100%;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:.6rem 1rem 1rem;margin:0}
+  .links.open a{padding:.8rem .6rem;border-bottom:1px solid var(--line-soft);border-radius:0}
+  .proc{height:auto;grid-template-columns:1fr}.steps{height:auto}.step{flex:none;padding:.7rem .95rem}
+  .panel{height:auto;grid-template-columns:1fr;grid-template-rows:auto}
+  .panel .zoom{height:210px}.panel .txt{min-height:240px}
+  .bento{grid-template-columns:repeat(2,1fr)}.t1{grid-column:span 2}.t5,.t6{grid-column:span 2}
+  .faq{grid-template-columns:1fr}
+  .hero::after{background:linear-gradient(180deg,rgba(30,17,21,.82),rgba(30,17,21,.7) 50%,rgba(30,17,21,.92))}
+  .badge{display:none}
+}
+@media (max-width:620px){
+  .cols,.feats,.miles{grid-template-columns:1fr}
+  .strips{grid-template-columns:repeat(5,1fr);gap:.4rem}
+  .sh span{display:none}.sh i{font-size:.95rem}
+  .rings{grid-template-columns:repeat(2,1fr)}
+  form.card{grid-template-columns:1fr}
+  .f-top{grid-template-columns:1fr}
+  .bento{grid-auto-rows:120px}
+  .hero h1{font-size:2.4rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}.rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bar" id="bar" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="mark" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2.2 3"/><circle cx="20" cy="20" r="14" fill="currentColor"/><path d="M13.5 12.5 20 21l6.5-8.5M20 21v8" fill="none" stroke="#2B161B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="31.8" r="1.2" fill="#2B161B"/></symbol>
+    <symbol id="swatch" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9l3 3v11H4z"/><path d="M13 5v3h3"/><path d="M16 12h4v7a2 2 0 0 1-2 2H8"/><path d="M7 11h3M7 14h5"/></g></symbol>
+    <symbol id="spool" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="20" height="4" rx="1.5"/><rect x="6" y="24" width="20" height="4" rx="1.5"/><path d="M9 8v16M23 8v16M9 11l14 3M9 15l14 3M9 19l14 3"/></g></symbol>
+    <symbol id="pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.4"/></g></symbol>
+  </defs>
+</svg>
+
+<header class="top dk">
+  <div class="wrap nav">
+    <a href="#home" class="logo" aria-label="YashdaWearex, home"><svg><use href="#mark"/></svg><span><b>YashdaWearex</b><small>Textiles</small></span></a>
+    <nav class="links" id="links" aria-label="Primary">
+      <a href="#collections">Collections</a><a href="#why">Craft</a><a href="#process">Process</a><a href="#gallery">Atelier</a><a href="#impact">Impact</a><a href="#story">Story</a><a href="#contact">Contact</a>
+    </nav>
+    <button class="tswitch" id="theme" type="button" aria-label="Switch colour theme" title="Dark / light"><span class="knob"></span><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></button>
+    <a class="btn pri sm" href="#contact"><svg><use href="#swatch"/></svg>Request swatches</a>
+    <button id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="links"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<section class="hero dk" id="home">
+  <div class="hero-bg" id="heroBg" aria-hidden="true"></div>
+  <div class="hero-dots" id="heroDots" role="group" aria-label="Change hero background"></div>
+  <div class="badge" aria-hidden="true">
+    <svg class="ring-t" viewBox="0 0 132 132"><defs><path id="circ" d="M66 66m-50 0a50 50 0 1 1 100 0a50 50 0 1 1-100 0"/></defs><text><textPath href="#circ">Since 1989 · Woven in Maharashtra · </textPath></text></svg>
+    <svg class="ic"><use href="#mark"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Fabrics · Yarns · Embellished weaves</p>
+      <h1>Cloth woven with patience, finished in <em>dusk tones</em>.</h1>
+      <p class="lead">YashdaWearex designs and weaves cotton, lace, wool and jacquard fabrics for fashion labels, boutiques and home brands. Small batches, colour-matched to your shade card, dispatched in as little as three weeks.</p>
+      <div class="cta">
+        <a class="btn pri" href="#collections">Explore collections <svg><use href="#arrow"/></svg></a>
+        <a class="btn ghost" href="#contact">Request swatches</a>
+      </div>
+      <div class="pills"><span class="pill">Azo-free dyes</span><span class="pill">Batches from 100 m</span><span class="pill">Custom colour matching</span><span class="pill">Export ready</span></div>
+    </div>
+    <div class="float"><div><b>7 days</b>lab-dip colour match</div></div>
+    <div class="stats">
+      <div class="card stat rv"><b data-count="35">35</b><span>years of weaving</span></div>
+      <div class="card stat rv" style="--d:.07s"><b data-count="1200" data-suf="+">1,200+</b><span>fabric designs</span></div>
+      <div class="card stat rv" style="--d:.14s"><b data-count="18">18</b><span>export countries</span></div>
+      <div class="card stat rv" style="--d:.21s"><b data-count="96" data-suf="%">96%</b><span>on-time dispatch</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="marquee" class="b1" aria-label="Fabric range">
+  <div class="mq"><div class="mq-track">
+    <span>Mulmul</span><span>Voile</span><span>Poplin</span><span>Jacquard</span><span>Sequin lace</span><span>Chanderi</span><span>Linen blend</span><span>Merino knit</span><span>Organza</span><span>Handloom cotton</span>
+    <span>Mulmul</span><span>Voile</span><span>Poplin</span><span>Jacquard</span><span>Sequin lace</span><span>Chanderi</span><span>Linen blend</span><span>Merino knit</span><span>Organza</span><span>Handloom cotton</span>
+  </div></div>
+</section>
+
+<section id="collections">
+  <div class="wrap">
+    <div class="head row rv">
+      <div><p class="eyebrow">Collections</p><h2 class="h2">Fabrics for every kind of garment</h2></div>
+      <div class="tabs" role="tablist" aria-label="Filter collections">
+        <button class="tab" role="tab" aria-selected="true" data-f="all" type="button">All</button>
+        <button class="tab" role="tab" aria-selected="false" data-f="natural" type="button">Natural</button>
+        <button class="tab" role="tab" aria-selected="false" data-f="woven" type="button">Woven</button>
+        <button class="tab" role="tab" aria-selected="false" data-f="embellished" type="button">Embellished</button>
+        <button class="tab" role="tab" aria-selected="false" data-f="knit" type="button">Knit &amp; yarn</button>
+      </div>
+    </div>
+    <div class="cols" id="col-grid">
+      <article class="card col rv" data-k="natural"><div class="sw"><img src="img/organic-cotton-folded-fabrics.jpg" alt="Folded organic cotton fabrics in olive, cream, sage and plum with a cotton boll" loading="lazy"><span class="tag">Natural</span></div>
+        <div class="cb"><h3>Organic Cotton &amp; Mulmul</h3><p>Soft-hand mulmul, poplin and voile in undyed and plant-dyed shades for shirting, kurtas and baby wear.</p>
+        <ul class="spec"><li><b>90–180</b>GSM</li><li><b>44–58"</b>Width</li><li><b>300 m</b>Min. order</li></ul><a class="more" href="#contact">Request sample <svg><use href="#arrow"/></svg></a></div></article>
+      <article class="card col rv" style="--d:.06s" data-k="embellished"><div class="sw"><img src="img/sequin-lace-fabric-rolls.jpg" alt="Rolls of sequin and lace fabric in blush, champagne and teal hanging side by side" loading="lazy"><span class="tag">Embellished</span></div>
+        <div class="cb"><h3>Lace &amp; Sequin Edit</h3><p>Net, tulle and sequin lace with scalloped borders, made for occasion wear, bridal and dupattas.</p>
+        <ul class="spec"><li><b>40–120</b>GSM</li><li><b>44"</b>Width</li><li><b>100 m</b>Min. order</li></ul><a class="more" href="#contact">Request sample <svg><use href="#arrow"/></svg></a></div></article>
+      <article class="card col rv" style="--d:.12s" data-k="woven"><div class="sw"><img src="img/woven-fabric-swatches.jpg" alt="Stack of woven fabric swatches in navy, red, teal and grey stripes" loading="lazy"><span class="tag">Woven</span></div>
+        <div class="cb"><h3>Woven Suiting &amp; Drapes</h3><p>Yarn-dyed checks, stripes and textured weaves with a crisp hand for blazers, trousers and upholstery.</p>
+        <ul class="spec"><li><b>180–320</b>GSM</li><li><b>56–60"</b>Width</li><li><b>200 m</b>Min. order</li></ul><a class="more" href="#contact">Request sample <svg><use href="#arrow"/></svg></a></div></article>
+      <article class="card col rv" data-k="knit"><div class="sw"><img src="img/hand-knitting-blue-wool.jpg" alt="Hands knitting a blue wool piece on bamboo needles" loading="lazy"><span class="tag">Knit &amp; yarn</span></div>
+        <div class="cb"><h3>Wool &amp; Hand-knit</h3><p>Merino and wool-blend knits, cable and rib structures, plus hand-knit panels for sweaters and accessories.</p>
+        <ul class="spec"><li><b>220–380</b>GSM</li><li><b>60"</b>Width</li><li><b>150 kg</b>Min. order</li></ul><a class="more" href="#contact">Request sample <svg><use href="#arrow"/></svg></a></div></article>
+      <article class="card col rv" style="--d:.06s" data-k="knit"><div class="sw"><img src="img/wool-yarn-shelves.jpg" alt="Wooden shelves of folded wool yarn in red, orange, lilac and turquoise" loading="lazy"><span class="tag">Knit &amp; yarn</span></div>
+        <div class="cb"><h3>Dyed Yarn Library</h3><p>Over 400 ready shades of cotton, wool and viscose yarn, cones or skeins, matched to your colour card.</p>
+        <ul class="spec"><li><b>400+</b>Shades</li><li><b>2/30–2/60</b>Counts</li><li><b>25 kg</b>Min. order</li></ul><a class="more" href="#contact">Request sample <svg><use href="#arrow"/></svg></a></div></article>
+      <article class="card col rv" style="--d:.12s" data-k="embellished"><div class="sw"><img src="img/embroidered-heritage-fabric.jpg" alt="Close view of hand-embroidered heritage fabric with coloured beads and thread work" loading="lazy"><span class="tag">Embellished</span></div>
+        <div class="cb"><h3>Heritage Embroidery</h3><p>Beadwork, zari and patchwork panels made by artisan teams, from single pieces to repeat runs.</p>
+        <ul class="spec"><li><b>Panel</b>Format</li><li><b>3–5 wks</b>Lead time</li><li><b>20 pcs</b>Min. order</li></ul><a class="more" href="#contact">Request sample <svg><use href="#arrow"/></svg></a></div></article>
+    </div>
+    <p class="fine">Specifications are illustrative, for demonstration.</p>
+  </div>
+</section>
+
+<section id="why" class="b2">
+  <div class="wrap">
+    <div class="head rv"><p class="eyebrow">Why YashdaWearex</p><h2 class="h2">Made slowly, checked twice</h2></div>
+    <div class="feats">
+      <div class="card feat rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19c3-5 6-8 10-10"/></svg></span><div><h3>Natural fibres first</h3><p>Cotton, linen, wool and silk blends sourced from audited growers and spinners.</p></div></div>
+      <div class="card feat rv" style="--d:.05s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11Z"/></svg></span><div><h3>Azo-free dyeing</h3><p>Every shade is dyed in a closed-loop house, with colour-fastness reports on request.</p></div></div>
+      <div class="card feat rv" style="--d:.1s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.100 2.100M16.300 16.300l2.100 2.100M5.600 18.400l2.100-2.100M16.300 7.700l2.100-2.100"/></svg></span><div><h3>Small-batch weaving</h3><p>Runs from 100 metres, so new labels can test a fabric before they commit.</p></div></div>
+      <div class="card feat rv"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><circle cx="12" cy="16" r="3"/></svg></span><div><h3>Colour matching</h3><p>Send a swatch or a shade code. Lab dips reach you within seven days.</p></div></div>
+      <div class="card feat rv" style="--d:.05s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.500 4.500L19 7"/><rect x="3" y="3" width="18" height="18" rx="4"/></svg></span><div><h3>Every roll inspected</h3><p>A four-point inspection on every roll, with defect maps shared before dispatch.</p></div></div>
+      <div class="card feat rv" style="--d:.1s"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.500-7-10a4 4 0 0 1 7-2.600A4 4 0 0 1 19 10c0 5.500-7 10-7 10Z"/></svg></span><div><h3>Fair workplaces</h3><p>Set hours, safe floors and artisan teams paid by the piece at fixed, published rates.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="dk">
+  <div class="wrap">
+    <div class="head rv"><p class="eyebrow">Process</p><h2 class="h2">From fibre to finished fabric</h2></div>
+    <div class="proc">
+      <div class="steps" role="tablist" aria-label="Process stages" id="steps"></div>
+      <div class="card panel rv" id="panel" style="--d:.08s"></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="head rv"><p class="eyebrow">Inside the atelier</p><h2 class="h2">Hands, thread and good light</h2></div>
+    <div class="bento">
+      <button class="tile t1 rv" type="button" data-lb><img src="img/design-studio-sketching.jpg" alt="A designer sketching at a studio desk beside a dress form and pattern boards"><span class="cap"><b>Design studio</b><span>Every collection starts as a sketch and a swatch.</span></span></button>
+      <button class="tile t2 rv" type="button" data-lb style="--d:.06s"><img src="img/tailoring-sewing-studio.jpg" alt="A tailor sewing at a machine in a bright studio with a dress form"><span class="cap"><b>Sample room</b><span>Fabrics are test-sewn before bulk.</span></span></button>
+      <button class="tile rv" type="button" data-lb style="--d:.1s"><img src="img/thread-spool-wall.jpg" alt="Wall of thread spools in pink, blue, red and gold"><span class="cap"><b>Thread wall</b><span>Over 400 shades in stock.</span></span></button>
+      <button class="tile rv" type="button" data-lb style="--d:.14s"><img src="img/design-team-fitting-review.jpg" alt="Two designers reviewing a garment on a fitting board"><span class="cap"><b>Fit review</b><span>Designers and weavers talk drape together.</span></span></button>
+      <button class="tile t5 rv" type="button" data-lb style="--d:.18s"><img src="img/boutique-ready-to-wear.jpg" alt="Boutique rail of ready-to-wear garments in neutral tones" style="object-position:center 40%"><span class="cap"><b>On the rail</b><span>Where our fabrics end up.</span></span></button>
+      <button class="tile t6 rv" type="button" data-lb style="--d:.22s"><img src="img/patchwork-textile-bazaar.jpg" alt="Hand-stitched patchwork textile panels hung at a market" style="object-position:center 30%"><span class="cap"><b>Patchwork panels</b><span>Heritage embroidery, one panel at a time.</span></span></button>
+    </div>
+  </div>
+</section>
+
+<section id="impact" class="dk">
+  <div class="wrap imp">
+    <div class="rv"><p class="eyebrow">Impact</p><h2 class="h2" style="margin-top:.4rem">Lighter on water, kinder on colour</h2><p class="lead">We treat and reuse process water, switch to plant-based dyes wherever the shade allows, and send cut-offs to craft partners.</p><p class="fine">Figures are illustrative targets for demonstration.</p></div>
+    <div class="rings">
+      <div class="card ring rv" style="--p:100"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="tr" cx="50" cy="50" r="42"/><circle class="fg" cx="50" cy="50" r="42"/></svg><b>100%</b><span>azo-free dyes</span></div>
+      <div class="card ring rv" style="--p:72;--d:.07s"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="tr" cx="50" cy="50" r="42"/><circle class="fg" cx="50" cy="50" r="42"/></svg><b>72%</b><span>process water recycled</span></div>
+      <div class="card ring rv" style="--p:60;--d:.14s"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="tr" cx="50" cy="50" r="42"/><circle class="fg" cx="50" cy="50" r="42"/></svg><b>60%</b><span>natural or recycled fibre</span></div>
+      <div class="card ring rv" style="--p:40;--d:.21s"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="tr" cx="50" cy="50" r="42"/><circle class="fg" cx="50" cy="50" r="42"/></svg><b>40%</b><span>power from rooftop solar</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="story" class="b1">
+  <div class="wrap story">
+    <div class="pics rv"><div class="a"><img src="img/mill-unit-exterior.jpg" alt="Whitewashed YashdaWearex weaving unit with a paved forecourt under a clear sky"></div><div class="b"><img src="img/hand-embroidery-artisan.jpg" alt="Smiling artisan holding a hand-embroidered flower and thread"></div></div>
+    <div>
+      <p class="eyebrow rv">Our story</p><h2 class="h2 rv" style="margin-top:.4rem">Six looms in 1989, a full mill today</h2>
+      <p class="lead rv">YashdaWearex began as a family weaving shed with six handlooms. We still start every collection with a conversation about hand, drape and colour, then decide which machine, or which pair of hands, should make it.</p>
+      <div class="miles">
+        <div class="card mile rv"><b>1989</b><h3>The first looms</h3><p>Six handlooms and a dye pot.</p></div>
+        <div class="card mile rv" style="--d:.05s"><b>2005</b><h3>First export</h3><p>Voile and mulmul reach Europe.</p></div>
+        <div class="card mile rv" style="--d:.1s"><b>2018</b><h3>Water loop</h3><p>Closed-loop effluent plant opens.</p></div>
+        <div class="card mile rv" style="--d:.15s"><b>2024</b><h3>Digital colour lab</h3><p>Lab dips in seven days.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="b2">
+  <div class="wrap">
+    <div class="head rv"><p class="eyebrow">Questions</p><h2 class="h2">Before you order</h2></div>
+    <div class="faq rv">
+      <details><summary>What is the minimum order?</summary><p>It depends on the fabric. Lace and sequin start at 100 metres, cotton and mulmul at 300 metres, yarn at 25 kg. Sampling is available below these quantities.</p></details>
+      <details><summary>How long do samples take?</summary><p>Swatches from stock ship in two to three days. Custom lab dips take about seven days, and new woven developments take three to four weeks.</p></details>
+      <details><summary>Can you match my colour?</summary><p>Yes. Send a physical swatch or a shade code. We return lab dips for approval before any bulk dyeing starts.</p></details>
+      <details><summary>Do you ship overseas?</summary><p>We export to 18 countries and handle documentation, packing and freight booking. Delivery terms are agreed per order.</p></details>
+      <details><summary>Can I visit the mill?</summary><p>Mill visits run on weekdays by appointment. Ask through the enquiry form and we will arrange a walk-through with the production team.</p></details>
+      <details><summary>Are test reports available?</summary><p>Colour-fastness, shrinkage and GSM reports are available for every batch on request.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="head rv"><p class="eyebrow">Contact</p><h2 class="h2">Request swatches</h2><p class="lead">Tell us what you are making. We reply on WhatsApp with swatch options and prices.</p></div>
+    <div class="contact">
+      <form class="card still rv" id="form" novalidate>
+        <label class="f" for="fn">Full name<input id="fn" name="name" required autocomplete="name" placeholder="Your name"></label>
+        <label class="f" for="fc">Company or label<input id="fc" name="company" autocomplete="organization" placeholder="Optional"></label>
+        <label class="f" for="ft">Interested in<select id="ft" name="topic"><option>Cotton &amp; mulmul</option><option>Lace &amp; sequin</option><option>Woven suiting</option><option>Wool &amp; knit</option><option>Dyed yarn</option><option>Heritage embroidery</option><option>Custom colour matching</option></select></label>
+        <label class="f" for="fq">Approx. quantity<input id="fq" name="qty" placeholder="e.g. 300 metres"></label>
+        <label class="f full" for="fm">Message<textarea id="fm" name="message" rows="3" placeholder="Garment type, colours, timeline"></textarea></label>
+        <div class="full" style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;position:relative;z-index:3"><button class="btn pri wa" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.5A9 9 0 1 1 21 12Z"/><path d="M9 9.500c0 3 2.500 5.500 5.500 5.500l1-1.500-2-1-.8.800c-.8-.4-1.600-1.200-2-2l.8-.8-1-2z"/></svg>Send on WhatsApp</button><button class="copy" type="button" id="copy">hello@yashdawearex.example · copy</button></div>
+        <p class="hint full" style="position:relative;z-index:3">Opens WhatsApp with your enquiry ready to send.</p>
+        <p class="msg" id="msg" role="status"></p>
+      </form>
+      <div class="locs">
+        <div class="card loc rv"><svg><use href="#pin"/></svg><div><b>Mill &amp; dye house</b><span>Plot 22, Textile Park, Ichalkaranji, Maharashtra 416115</span><span>Mon to Sat, 9:30 to 18:00</span></div></div>
+        <div class="card loc rv" style="--d:.06s"><svg><use href="#pin"/></svg><div><b>Mumbai showroom</b><span>Lower Parel, Mumbai 400013</span><span>By appointment, Tue to Sat</span></div></div>
+        <div class="card loc rv" style="--d:.12s"><svg><use href="#pin"/></svg><div><b>Export desk</b><span>exports@yashdawearex.example · +91 230 555 0188</span><span>Replies within one working day</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta" class="dk">
+  <div class="wrap cta-in rv">
+    <div><h2>Have a colour in mind?</h2><p>Send us a swatch and get a lab dip in seven days.</p></div>
+    <a class="btn pri" href="#contact">Request swatches <svg><use href="#arrow"/></svg></a>
+  </div>
+</section>
+</main>
+
+<footer class="dk">
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a href="#home" class="logo" aria-label="YashdaWearex, home"><svg><use href="#mark"/></svg><span><b>YashdaWearex</b><small>Textiles</small></span></a>
+        <p>Cotton, lace, wool and jacquard fabrics, woven and dyed in Maharashtra since 1989.</p>
+        <div class="social">
+          <a href="#home" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.500" cy="6.500" r="1" fill="currentColor"/></svg></a>
+          <a href="#home" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M11 8c3-1 5 1 4 3.500S12 14 11 16l1.500-8M10 20l1.500-6"/></svg></a>
+          <a href="#home" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4a2.500 2.500 0 0 1 5 0v4M11 10v7"/></svg></a>
+          <a href="#home" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="m10 9.500 5 2.500-5 2.500z" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Explore</h4><ul class="two-col"><li><a href="#collections">Collections</a></li><li><a href="#story">Our story</a></li><li><a href="#process">Process</a></li><li><a href="#gallery">Atelier</a></li><li><a href="#impact">Impact</a></li><li><a href="#faq">Questions</a></li></ul></div>
+      <div><h4>Reach us</h4><ul><li>hello@yashdawearex.example</li><li>+91 230 555 0142</li><li>Ichalkaranji, Maharashtra</li></ul></div>
+      <div><h4>Colour news</h4><form class="news" id="news" novalidate><label for="ne" style="position:absolute;left:-9999px">Email for updates</label><input id="ne" type="email" placeholder="Your email" autocomplete="email"><button class="btn pri sm" type="submit">Join</button></form><p id="nmsg" role="status"></p></div>
+    </div>
+    <div class="f-bot"><span>&copy; 2026 YashdaWearex. Fictional company for demonstration; figures are illustrative.</span><nav aria-label="Footer"><a href="#home">Privacy</a><a href="#home">Terms</a><a href="#home">Cookies</a></nav></div>
+  </div>
+</footer>
+
+<button class="icon-btn" id="top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer"><figure><button class="icon-btn" id="lbx" type="button" aria-label="Close image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><img id="lbi" alt=""><figcaption id="lbc"></figcaption></figure></div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches, fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var root=document.documentElement;
+
+  /* HERO BACKGROUND IMAGES. To change them, edit this list: src is the image path, pos is the focal point (x y).
+     Add or remove lines freely. The slideshow fades every 6.5 seconds and the dots on the right switch images. */
+  var HERO_IMAGES=[
+    {src:'img/sequin-lace-fabric-rolls.jpg',pos:'70% 45%',label:'Sequin lace rolls'},
+    {src:'img/patchwork-textile-bazaar.jpg',pos:'55% 35%',label:'Patchwork panels'},
+    {src:'img/hand-knitting-blue-wool.jpg',pos:'60% 55%',label:'Hand knitting'},
+    {src:'img/design-studio-sketching.jpg',pos:'70% 40%',label:'Design studio'}];
+  (function(){
+    var bgEl=$('#heroBg'),dots=$('#heroDots'),layers=[],btns=[],idx=0,timer=null;
+    HERO_IMAGES.forEach(function(h,i){
+      var d=document.createElement('div');d.className='hs'+(i===0?' on':'');
+      d.style.backgroundImage="url('"+h.src+"')";d.style.backgroundPosition=h.pos;bgEl.appendChild(d);layers.push(d);
+      var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Show image '+(i+1)+': '+h.label);b.setAttribute('aria-current',i===0);
+      b.addEventListener('click',function(){go(i);restart()});dots.appendChild(b);btns.push(b)});
+    function go(i){layers[idx].classList.remove('on');btns[idx].setAttribute('aria-current','false');idx=i;layers[idx].classList.add('on');btns[idx].setAttribute('aria-current','true')}
+    function restart(){if(reduce||HERO_IMAGES.length<2)return;clearInterval(timer);timer=setInterval(function(){go((idx+1)%layers.length)},6500)}
+    restart();
+  })();
+
+  /* theme */
+  try{var t=localStorage.getItem('yashdawearex-theme');if(t)root.setAttribute('data-theme',t)}catch(e){}
+  $('#theme').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');var dark=cur?cur==='dark':!matchMedia('(prefers-color-scheme:light)').matches;
+    var n=dark?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('yashdawearex-theme',n)}catch(e){}
+  });
+
+  /* menu */
+  var links=$('#links'),bg=$('#burger');
+  bg.addEventListener('click',function(){var o=links.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
+  $$('a',links).forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');bg.setAttribute('aria-expanded','false')})});
+
+  /* progress + back to top */
+  var bar=$('#bar'),topb=$('#top');
+  function sc(){var h=document.documentElement.scrollHeight-innerHeight,y=scrollY;bar.style.transform='scaleX('+(h>0?y/h:0)+')';topb.classList.toggle('show',y>700)}
+  addEventListener('scroll',sc,{passive:true});sc();
+  topb.addEventListener('click',function(){scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+
+  /* reveal + counters */
+  function count(el){
+    var end=parseFloat(el.dataset.count),dec=+el.dataset.dec||0,suf=el.dataset.suf||'',t0=performance.now(),d=1400;
+    if(reduce)return;
+    (function f(n){var p=Math.min(1,(n-t0)/d),e=1-Math.pow(1-p,3),v=end*e;
+      el.textContent=v.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec})+suf;
+      if(p<1)requestAnimationFrame(f)})(t0);
+  }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;var el=e.target;el.classList.add('in');
+    $$('[data-count]',el).forEach(count);io.unobserve(el)})},{threshold:.12});
+  $$('.rv').forEach(function(el){io.observe(el)});
+
+  /* cursor glow */
+  document.addEventListener('pointermove',function(e){
+    var c=e.target.closest&&e.target.closest('.card');if(!c)return;
+    var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')});
+
+  /* collection filter */
+  var tabs=$$('.tab');
+  tabs.forEach(function(b){b.addEventListener('click',function(){
+    tabs.forEach(function(x){x.setAttribute('aria-selected',x===b)});
+    $$('#col-grid .col').forEach(function(m){
+      var show=b.dataset.f==='all'||m.dataset.k===b.dataset.f;m.hidden=!show;
+      if(show){m.classList.add('in');m.style.animation='none';void m.offsetWidth;m.style.animation=''}})})});
+
+  /* process */
+  var P=[
+    {t:'Fibre & yarn',s:'Sourced, spun, dyed in skeins',img:'img/dyed-cotton-yarn-skeins.jpg',alt:'Skeins of dyed cotton yarn arranged from purple through green to red',p:'We buy cotton, wool and viscose from audited growers, then dye yarn in skeins and cones to your shade card.',l:['Audited fibre sourcing','Skein and cone dyeing','Lab dips approved before bulk']},
+    {t:'Spinning & prep',s:'Clean, even, tested yarn',img:'img/spinning-mill-quality-check.jpg',alt:'A mill worker in a blue uniform checking yarn cones at a spinning mill',p:'Yarn is spun, wound and checked for strength and evenness. Every lot is logged before it goes to the looms.',l:['Count and strength checks','Lot-wise traceability','Warping prepared by hand and machine']},
+    {t:'Print & dye',s:'Screen print, resist, over-dye',img:'img/screen-printing-studio.jpg',alt:'Artisans pulling a screen print across a turquoise table',p:'Block, screen and resist printing sit beside our dye house, so a pattern and its colour are developed together.',l:['Hand screen and block printing','Closed-loop dye house','Colour-fastness testing']},
+    {t:'Weave & knit',s:'Looms, jacquards and hand-knit',img:'img/warping-weaving-machine.jpg',alt:'Warping and weaving machine with white yarn cones and taut threads',p:'Shuttle, jacquard and knitting machines run alongside handloom and hand-knit teams for pieces that need a human touch.',l:['Handloom and power loom','Jacquard and dobby designs','Hand-knit and embroidery panels']},
+    {t:'Finish & inspect',s:'Hand detail, four-point check',img:'img/hand-embroidery-artisan.jpg',alt:'An artisan wearing gloves holding a hand-embroidered flower',p:'Finishing, hand detailing and a four-point inspection happen last. Defect maps go to you before the truck leaves.',l:['Hand finishing and beadwork','Four-point roll inspection','Packed and documented for export']}];
+  var steps=$('#steps'),panel=$('#panel');
+  P.forEach(function(p,i){var b=document.createElement('button');b.type='button';b.className='step';b.setAttribute('role','tab');
+    b.innerHTML='<i>'+(i+1)+'</i><span><b>'+p.t.replace('&','&amp;')+'</b><span>'+p.s+'</span></span>';
+    b.addEventListener('click',function(){show(i)});b.addEventListener('mouseenter',function(){if(fine)show(i)});steps.appendChild(b)});
+  var cur=-1;
+  function show(i){
+    if(i===cur)return;cur=i;var p=P[i];
+    $$('.step',steps).forEach(function(b,j){b.setAttribute('aria-selected',j===i)});
+    panel.classList.remove('swap');void panel.offsetWidth;panel.classList.add('swap');
+    panel.innerHTML='<div class="zoom"><img src="'+p.img+'" alt="'+p.alt+'"></div><div class="txt"><p class="eyebrow">Stage '+(i+1)+' of 5</p><h3>'+p.t.replace('&','&amp;')+'</h3><p>'+p.p+'</p><ul>'+p.l.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>';
+  }
+  show(0);
+
+  /* lightbox */
+  var lb=$('#lb'),lbi=$('#lbi'),lbc=$('#lbc'),last=null;
+  $$('[data-lb]').forEach(function(t){t.addEventListener('click',function(){
+    var im=$('img',t);lbi.src=im.src;lbi.alt=im.alt;lbc.textContent=$('b',t).textContent+'. '+$('.cap span',t).textContent;lb.classList.add('open');last=t;$('#lbx').focus()})});
+  function close(){lb.classList.remove('open');if(last)last.focus()}
+  $('#lbx').addEventListener('click',close);lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))close()});
+
+  /* scroll spy */
+  var secs=['collections','why','process','gallery','impact','story','contact'].map(function(id){return document.getElementById(id)});
+  var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)$$('a',links).forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(function(s){s&&spy.observe(s)});
+
+  /* WhatsApp enquiry. Put the receiving number here in international format without + (for example 919876543210).
+     Left empty, WhatsApp opens its contact picker with the message already typed. */
+  var WA_NUMBER='';
+  var msg=$('#msg');
+  $('#form').addEventListener('submit',function(e){e.preventDefault();
+    var n=$('#fn').value.trim();
+    if(!n){msg.style.color='#E0735B';msg.textContent='Please enter your name.';$('#fn').focus();return}
+    var co=$('#fc').value.trim(),q=$('#fq').value.trim(),m=$('#fm').value.trim();
+    var text='Hello YashdaWearex,\nMy name is '+n+(co?' from '+co:'')+'.\nInterested in: '+$('#ft').value+(q?'\nQuantity: '+q:'')+(m?'\nMessage: '+m:'');
+    var url='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(text);
+    var w=null;try{w=window.open(url,'_blank','noopener')}catch(x){}
+    msg.style.color='';msg.textContent='';
+    var a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';a.textContent='Open WhatsApp';
+    msg.appendChild(document.createTextNode(w?'WhatsApp is opening with your message. If it did not, ':'Your message is ready. '));msg.appendChild(a);msg.appendChild(document.createTextNode('.'))});
+  $('#copy').addEventListener('click',function(){
+    var b=this,done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='hello@yashdawearex.example · copy'},1600)};
+    try{navigator.clipboard.writeText('hello@yashdawearex.example').then(done,function(){})}catch(e){}});
+  $('#news').addEventListener('submit',function(e){e.preventDefault();var v=$('#ne').value.trim(),o=$('#nmsg');
+    if(!/^\S+@\S+\.\S+$/.test(v)){o.style.color='#E0735B';o.textContent='Enter a valid email address.';return}
+    o.style.color='';o.textContent='Thanks. This is a demo form, so nothing was saved.';this.reset()});
+})();
+</script>
+
+</body>
+</html>
