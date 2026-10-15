@@ -296,6 +296,7 @@ form.card{--rad:30px;padding:1.4rem 1.5rem;display:grid;grid-template-columns:1f
 .f input,.f select,.f textarea{font:400 14.5px var(--sans);color:var(--fg);background:var(--field);border:1px solid var(--line-soft);border-radius:14px 4px 14px 4px;padding:.62rem .8rem;transition:border-color .25s,box-shadow .25s;position:relative;z-index:3}
 .f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--accent-text);box-shadow:0 0 0 3px var(--glow)}
 .f textarea{resize:vertical;min-height:70px}
+.f input[type=date]{min-height:42px;cursor:pointer}
 .msg{grid-column:1/-1;font-size:13.5px;color:var(--good);min-height:1.2em;position:relative;z-index:3}
 .msg a{color:var(--accent-text);text-decoration:underline}
 .hint{font-size:12.5px;color:var(--muted)}
@@ -559,6 +560,7 @@ footer li a:hover{color:var(--accent-text);transform:translateX(5px)}
         <label class="f" for="fc">Company or label<input id="fc" name="company" autocomplete="organization" placeholder="Optional"></label>
         <label class="f" for="ft">Interested in<select id="ft" name="topic"><option>Cotton &amp; mulmul</option><option>Lace &amp; sequin</option><option>Woven suiting</option><option>Wool &amp; knit</option><option>Dyed yarn</option><option>Heritage embroidery</option><option>Custom colour matching</option></select></label>
         <label class="f" for="fq">Approx. quantity<input id="fq" name="qty" placeholder="e.g. 300 metres"></label>
+        <label class="f full" for="fd">Needed by (date)<input id="fd" name="date" type="date"></label>
         <label class="f full" for="fm">Message<textarea id="fm" name="message" rows="3" placeholder="Garment type, colours, timeline"></textarea></label>
         <div class="full" style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;position:relative;z-index:3"><button class="btn pri wa" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.5A9 9 0 1 1 21 12Z"/><path d="M9 9.500c0 3 2.500 5.500 5.500 5.500l1-1.500-2-1-.8.800c-.8-.4-1.600-1.200-2-2l.8-.8-1-2z"/></svg>Send on WhatsApp</button><button class="copy" type="button" id="copy">hello@yashdawearex.example · copy</button></div>
         <p class="hint full" style="position:relative;z-index:3">Opens WhatsApp with your enquiry ready to send.</p>
@@ -711,11 +713,12 @@ footer li a:hover{color:var(--accent-text);transform:translateX(5px)}
      Left empty, WhatsApp opens its contact picker with the message already typed. */
   var WA_NUMBER='';
   var msg=$('#msg');
+  (function(){var t=new Date();t.setMinutes(t.getMinutes()-t.getTimezoneOffset());$('#fd').min=t.toISOString().slice(0,10)})();
   $('#form').addEventListener('submit',function(e){e.preventDefault();
     var n=$('#fn').value.trim();
     if(!n){msg.style.color='#E0735B';msg.textContent='Please enter your name.';$('#fn').focus();return}
-    var co=$('#fc').value.trim(),q=$('#fq').value.trim(),m=$('#fm').value.trim();
-    var text='Hello YashdaWearex,\nMy name is '+n+(co?' from '+co:'')+'.\nInterested in: '+$('#ft').value+(q?'\nQuantity: '+q:'')+(m?'\nMessage: '+m:'');
+    var co=$('#fc').value.trim(),q=$('#fq').value.trim(),m=$('#fm').value.trim(),dv=$('#fd').value,dt=dv?new Date(dv+'T00:00:00').toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}):'';
+    var text='Hello YashdaWearex,\nMy name is '+n+(co?' from '+co:'')+'.\nInterested in: '+$('#ft').value+(q?'\nQuantity: '+q:'')+(dt?'\nNeeded by: '+dt:'')+(m?'\nMessage: '+m:'');
     var url='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(text);
     var w=null;try{w=window.open(url,'_blank','noopener')}catch(x){}
     msg.style.color='';msg.textContent='';
